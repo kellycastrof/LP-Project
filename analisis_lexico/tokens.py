@@ -5,12 +5,13 @@ reserved = {
     'new':'NEW',
     'if':'IF', 'else if':'ELIF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
     '||':'OR', '&&':'AND', '!':'NOT'  ,
-    'true':'TRUE', 'false':'FALSE', 'null':'NULL' 
+    'true':'TRUE', 'false':'FALSE', 'null':'NULL',
+    'function' : 'FUNCTION'
 
 }
 
 #RESERVED FUNCTION NAMES
-function={
+function = {
     'toUpperCase':'TOUPPERCASE',
     'toLowerCase': 'TOLOWERCASE',
     'startsWith': 'STARTSWITH',
@@ -19,7 +20,7 @@ function={
     'shift':'SHIFT'
 }
 
-literals=['{', '}']
+literals = ['{', '}']
 
 # TOKENS
 tokens = ["MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
@@ -112,7 +113,10 @@ def t_COMMENT(t):
 print("PRIMER EJEMPLO\n")
 cadena= "let  example = \"hello\";"
 cadena2= "a.toLowerCase()"
+cadena3 = "function hola(){hola=5}"
 print(cadena)
 printLex(cadena)
 print("\n",cadena2)
 printLex(cadena2)
+print("\n",cadena3)
+printLex(cadena3)
