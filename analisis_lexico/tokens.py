@@ -92,7 +92,7 @@ def t_ID(t):
     elif function.get(t.value)!=None:
         t.type = function.get(t.value)
     else:
-        reserved.get(t.value, 'ID')  # Check for reserved words
+        t.type= 'ID'  # Check for reserved words
     return t
 
 
