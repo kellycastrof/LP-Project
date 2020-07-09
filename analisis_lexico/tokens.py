@@ -26,7 +26,7 @@ literals = ['{', '}']
 tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
-          "SEMICOLON", "POINT" ,
+          "SEMICOLON", "POINT" , "SEPARATOR" ,
           "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
@@ -63,6 +63,7 @@ t_NOT = r'!'
 t_SEMICOLON = r';'
 t_POINT = r'\.'
 t_STRING= r'[\'\"].*[\'\"]'
+t_SEPARATOR = r'\,'
 
 
 t_ignore = ' \t'
@@ -118,10 +119,15 @@ def t_COMMENT(t):
 ################## PRIMER EJEMPLO ###########
 print(function.get("\.toLowerCase"),reserved.keys())
 print("PRIMER EJEMPLO\n")
-cadena= "let  example = \"hello\";"
+cadena= "let example = \"hello\";"
 cadena2= "a.toLowerCase()"
 cadena3 = "function hola(){hola=5}"
 cadena4 = "console.log(hola)"
+cadena5 = "var example = \"\""
+cadena6 = "example = 2"
+cadena7 = "true===1"
+cadena8 = "var arr = [1,2.5,3]"
+cadena9 = "carro = {\"llanta\",\"luces\"}"
 print(cadena)
 printLex(cadena)
 print("\n",cadena2)
@@ -130,3 +136,13 @@ print("\n",cadena3)
 printLex(cadena3)
 print("\n",cadena4)
 printLex(cadena4)
+print("\n",cadena5)
+printLex(cadena5)
+print("\n",cadena6)
+printLex(cadena6)
+print("\n",cadena7)
+printLex(cadena7)
+print("\n",cadena8)
+printLex(cadena8)
+print("\n",cadena9)
+printLex(cadena9)
