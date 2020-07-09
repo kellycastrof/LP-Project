@@ -6,24 +6,24 @@ reserved = {
     'if':'IF', 'else if':'ELIF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
     '||':'OR', '&&':'AND', '!':'NOT'  ,
     'true':'TRUE', 'false':'FALSE', 'null':'NULL',
-    'function' : 'FUNCTION'
+    'function' : 'FUNCTION',
 
 }
 
 #RESERVED FUNCTION NAMES
 function = {
-    'toUpperCase':'TOUPPERCASE',
-    'toLowerCase': 'TOLOWERCASE',
-    'startsWith': 'STARTSWITH',
-    'pop':'POP',
-    'push':'PUSH',
-    'shift':'SHIFT'
+    r'\.toUpperCase':'TOUPPERCASE',
+    r'\.toLowerCase': 'TOLOWERCASE',
+    r'\.startsWith': 'STARTSWITH',
+    r'\.pop':'POP',
+    r'\.push':'PUSH',
+    r'\.shift':'SHIFT',
 }
 
 literals = ['{', '}']
 
 # TOKENS
-tokens = ["MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
+tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
           "SEMICOLON", "POINT" ,
@@ -64,6 +64,7 @@ t_SEMICOLON = r';'
 t_POINT = r'\.'
 t_STRING= r'[\'\"].*[\'\"]'
 
+
 t_ignore = ' \t'
 
 
@@ -85,9 +86,15 @@ def t_newLine(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def t_PRINT(t):
+    r'console\.log'
+    t.type = "PRINT"
+    return t
 
 def t_ID(t):
-    r'[a-zA-Z_\$][a-zA-Z_0-9\$]*'
+    r'[a-zA-Z_\$\.][a-zA-Z_0-9\$]*'
+    #t.value = t.value.encode('unicode_escape')
+    t.value = t.value.replace(".","\.")
     if reserved.get(t.value)!=None:
         t.type = reserved.get(t.value)
     elif function.get(t.value)!=None:
@@ -95,7 +102,6 @@ def t_ID(t):
     else:
         t.type= 'ID'  # Check for reserved words
     return t
-
 
 def printLex(cadena):
     analizador=lex.lex()
@@ -110,13 +116,17 @@ def t_COMMENT(t):
 
 
 ################## PRIMER EJEMPLO ###########
+print(function.get("\.toLowerCase"),reserved.keys())
 print("PRIMER EJEMPLO\n")
 cadena= "let  example = \"hello\";"
 cadena2= "a.toLowerCase()"
 cadena3 = "function hola(){hola=5}"
+cadena4 = "console.log(hola)"
 print(cadena)
 printLex(cadena)
 print("\n",cadena2)
 printLex(cadena2)
 print("\n",cadena3)
 printLex(cadena3)
+print("\n",cadena4)
+printLex(cadena4)
