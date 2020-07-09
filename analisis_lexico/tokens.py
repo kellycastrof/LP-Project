@@ -29,11 +29,7 @@ literals = ['{', '}']
 tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
-<<<<<<< HEAD
-          "SEMICOLON", "POINT" , "SEPARATOR" ,
-=======
           "SEMICOLON", "POINT" , "COMMA",
->>>>>>> 12131c48b7e4f8329042fd73b1ede7004d8e55c8
           "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
@@ -69,9 +65,8 @@ t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
 t_POINT = r'\.'
-t_COMMA = r','
+t_COMMA = r'\,'
 t_STRING= r'[\'\"].*[\'\"]'
-t_SEPARATOR = r'\,'
 
 
 t_ignore = ' \t'
@@ -124,9 +119,9 @@ def t_COMMENT(t):
      pass
 
 
-################## PRIMER EJEMPLO ###########
+################## EJEMPLOS ###########
 print(function.get("\.toLowerCase"),reserved.keys())
-print("PRIMER EJEMPLO\n")
+print("EJEMPLOS\n")
 cadena= "let example = \"hello\";"
 cadena2= "a.toLowerCase()"
 cadena3 = "function hola(){hola=5}"
