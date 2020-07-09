@@ -18,6 +18,9 @@ function = {
     r'\.pop':'POP',
     r'\.push':'PUSH',
     r'\.shift':'SHIFT',
+    r'\.setDate':'SETDATE', r'\.toString':'TOSTRING', r'\.getFullYear':'GETFULLYEAR',
+    r'\.has':'HAS' ,  r'\.intersection':'INTERSECTION', r'\.union':'UNION',
+    r'array':'ARRAY'
 }
 
 literals = ['{', '}']
@@ -26,7 +29,11 @@ literals = ['{', '}']
 tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
+<<<<<<< HEAD
           "SEMICOLON", "POINT" , "SEPARATOR" ,
+=======
+          "SEMICOLON", "POINT" , "COMMA",
+>>>>>>> 12131c48b7e4f8329042fd73b1ede7004d8e55c8
           "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
@@ -62,6 +69,7 @@ t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
 t_POINT = r'\.'
+t_COMMA = r','
 t_STRING= r'[\'\"].*[\'\"]'
 t_SEPARATOR = r'\,'
 
@@ -146,3 +154,18 @@ print("\n",cadena8)
 printLex(cadena8)
 print("\n",cadena9)
 printLex(cadena9)
+cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}" ]
+cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
+cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
+
+for example in cadenas:
+    printLex(example)
+    print("\n\n")
+
+for example in cadenas1:
+    printLex(example)
+    print("\n\n")
+
+for example in cadenas2:
+    printLex(example)
+    print("\n\n")
