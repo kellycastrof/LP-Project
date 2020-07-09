@@ -18,6 +18,9 @@ function = {
     r'\.pop':'POP',
     r'\.push':'PUSH',
     r'\.shift':'SHIFT',
+    r'\.setDate':'SETDATE', r'\.toString':'TOSTRING', r'\.getFullYear':'GETFULLYEAR',
+    r'\.has':'HAS' ,  r'\.intersection':'INTERSECTION', r'\.union':'UNION',
+    r'array':'ARRAY'
 }
 
 literals = ['{', '}']
@@ -26,7 +29,7 @@ literals = ['{', '}']
 tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
-          "SEMICOLON", "POINT" ,
+          "SEMICOLON", "POINT" , "COMMA",
           "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
@@ -62,6 +65,7 @@ t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
 t_POINT = r'\.'
+t_COMMA = r','
 t_STRING= r'[\'\"].*[\'\"]'
 
 
@@ -116,17 +120,18 @@ def t_COMMENT(t):
 
 
 ################## PRIMER EJEMPLO ###########
-print(function.get("\.toLowerCase"),reserved.keys())
-print("PRIMER EJEMPLO\n")
-cadena= "let  example = \"hello\";"
-cadena2= "a.toLowerCase()"
-cadena3 = "function hola(){hola=5}"
-cadena4 = "console.log(hola)"
-print(cadena)
-printLex(cadena)
-print("\n",cadena2)
-printLex(cadena2)
-print("\n",cadena3)
-printLex(cadena3)
-print("\n",cadena4)
-printLex(cadena4)
+cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}" ]
+cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
+cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
+
+for example in cadenas:
+    printLex(example)
+    print("\n\n")
+
+for example in cadenas1:
+    printLex(example)
+    print("\n\n")
+
+for example in cadenas2:
+    printLex(example)
+    print("\n\n")
