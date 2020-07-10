@@ -118,37 +118,37 @@ def t_COMMENT(t):
      r'(\/\/.*)|(\/\*.*\*\/)'
      pass
 
-
+analizadorL = lex.lex()
 ################## EJEMPLOS ###########
-print(function.get("\.toLowerCase"),reserved.keys())
-print("EJEMPLOS\n")
-cadena= "let example = \"hello\";"
-cadena2= "a.toLowerCase()"
-cadena3 = "function hola(){hola=5}"
-cadena4 = "console.log(hola)"
-cadena5 = "var example = \"\""
-cadena6 = "example = 2"
-cadena7 = "true===1"
-cadena8 = "var arr = [1,2.5,3]"
-cadena9 = "carro = {\"llanta\",\"luces\"}"
-print(cadena)
-printLex(cadena)
-print("\n",cadena2)
-printLex(cadena2)
-print("\n",cadena3)
-printLex(cadena3)
-print("\n",cadena4)
-printLex(cadena4)
-print("\n",cadena5)
-printLex(cadena5)
-print("\n",cadena6)
-printLex(cadena6)
-print("\n",cadena7)
-printLex(cadena7)
-print("\n",cadena8)
-printLex(cadena8)
-print("\n",cadena9)
-printLex(cadena9)
+# print(function.get("\.toLowerCase"),reserved.keys())
+# print("EJEMPLOS\n")
+# cadena= "let example = \"hello\";"
+# cadena2= "a.toLowerCase()"
+# cadena3 = "function hola(){hola=5}"
+# cadena4 = "console.log(hola)"
+# cadena5 = "var example = \"\""
+# cadena6 = "example = 2"
+# cadena7 = "true===1"
+# cadena8 = "var arr = [1,2.5,3]"
+# cadena9 = "carro = {\"llanta\",\"luces\"}"
+# print(cadena)
+# printLex(cadena)
+# print("\n",cadena2)
+# printLex(cadena2)
+# print("\n",cadena3)
+# printLex(cadena3)
+# print("\n",cadena4)
+# printLex(cadena4)
+# print("\n",cadena5)
+# printLex(cadena5)
+# print("\n",cadena6)
+# printLex(cadena6)
+# print("\n",cadena7)
+# printLex(cadena7)
+# print("\n",cadena8)
+# printLex(cadena8)
+# print("\n",cadena9)
+# printLex(cadena9)
 cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}" ]
 cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
 cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
