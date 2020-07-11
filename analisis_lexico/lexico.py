@@ -3,7 +3,7 @@ import ply.lex as lex
 reserved = {
     'var':'VAR',  'let':'LET',
     'new':'NEW',
-    'if':'IF', 'else if':'ELIF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
+    'else if':'ELIF', 'if':'IF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
     '||':'OR', '&&':'AND', '!':'NOT'  ,
     'true':'TRUE', 'false':'FALSE', 'null':'NULL',
     'function' : 'FUNCTION',
@@ -55,7 +55,7 @@ t_STRICTNOTEQUALS = r'!=='
 t_IF = r'if'
 t_FOR = r'for'
 t_WHILE = r'while'
-t_ELIF = r'elif'
+t_ELIF = r'else if'
 t_ELSE = r'else'
 t_VAR = r'var'
 t_LET = r'let'
@@ -150,7 +150,7 @@ print("\n",cadena8)
 printLex(cadena8)
 print("\n",cadena9)
 printLex(cadena9)
-cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}" ]
+cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
 cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
 cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
 
@@ -158,10 +158,10 @@ for example in cadenas:
     printLex(example)
     print("\n\n")
 
-for example in cadenas1:
-    printLex(example)
-    print("\n\n")
-
-for example in cadenas2:
-    printLex(example)
-    print("\n\n")
+# for example in cadenas1:
+#     printLex(example)
+#     print("\n\n")
+#
+# for example in cadenas2:
+#     printLex(example)
+#     print("\n\n")
