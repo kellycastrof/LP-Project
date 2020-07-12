@@ -1,7 +1,7 @@
 import ply.lex as lex
 #RESERVED WORDS
 reserved = {
-    'var':'VAR',  'let':'LET',
+    'var': 'VAR', 'let':'LET' ,
     'new':'NEW',
     'else if':'ELIF', 'if':'IF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
     '||':'OR', '&&':'AND', '!':'NOT'  ,
@@ -12,15 +12,15 @@ reserved = {
 
 #RESERVED FUNCTION NAMES
 function = {
-    r'\.toUpperCase':'TOUPPERCASE',
-    r'\.toLowerCase': 'TOLOWERCASE',
-    r'\.startsWith': 'STARTSWITH',
-    r'\.pop':'POP',
-    r'\.push':'PUSH',
-    r'\.shift':'SHIFT',
-    r'\.setDate':'SETDATE', r'\.toString':'TOSTRING', r'\.getFullYear':'GETFULLYEAR',
-    r'\.has':'HAS' ,  r'\.intersection':'INTERSECTION', r'\.union':'UNION',
-    r'array':'ARRAY'
+    '.toUpperCase':'TOUPPERCASE',
+    '.toLowerCase': 'TOLOWERCASE',
+    '.startsWith': 'STARTSWITH',
+    '.pop':'POP',
+    '.push':'PUSH',
+    '.shift':'SHIFT',
+    '.setDate':'SETDATE', '.toString':'TOSTRING', '.getFullYear':'GETFULLYEAR',
+    '.has':'HAS' ,  '.intersection':'INTERSECTION', '.union':'UNION',
+    'array':'ARRAY'
 }
 
 literals = ['{', '}']
@@ -44,21 +44,19 @@ t_RPAREN = r'\)'
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
 t_EQUAL = r'\='
-t_EQUALS = r'=='
+t_EQUALS = r'\=\='
 t_NOTEQUALS = r'\!\='
-t_MORETHAN = r'>'
-t_LESSTHAN = r'<'
-t_MORETHANEQUALS = r'>='
-t_LESSTHANEQUALS = r'<='
-t_STRICTEQUALS = r'==='
-t_STRICTNOTEQUALS = r'!=='
+t_MORETHAN = r'\>'
+t_LESSTHAN = r'\<'
+t_MORETHANEQUALS = r'\>\='
+t_LESSTHANEQUALS = r'\<\='
+t_STRICTEQUALS = r'\=\=\='
+t_STRICTNOTEQUALS = r'\!\=\='
 t_IF = r'if'
 t_FOR = r'for'
 t_WHILE = r'while'
 t_ELIF = r'else if'
 t_ELSE = r'else'
-t_VAR = r'var'
-t_LET = r'let'
 t_NEW = r'new'
 t_OR = r'\|\|'
 t_AND = r'\&\&'
@@ -67,6 +65,8 @@ t_SEMICOLON = r';'
 t_POINT = r'\.'
 t_COMMA = r'\,'
 t_STRING= r'[\'\"].*[\'\"]'
+
+
 
 
 t_ignore = ' \t'
@@ -95,7 +95,7 @@ def t_PRINT(t):
 def t_ID(t):
     r'[a-zA-Z_\$\.][a-zA-Z_0-9\$]*'
     #t.value = t.value.encode('unicode_escape')
-    t.value = t.value.replace(".","\.")
+    #t.value = t.value.replace(".","\.")
     if reserved.get(t.value)!=None:
         t.type = reserved.get(t.value)
     elif function.get(t.value)!=None:
@@ -116,12 +116,12 @@ def t_COMMENT(t):
      pass
 
 def t_error(t):
-    print("No se ha reconocido {}".format(t.value[0]))
+    print("No se ha reconocido en lexico {}".format(t.value[0]))
     t.lexer.skip(1)
 
 analizadorL = lex.lex()
 ################## EJEMPLOS ###########
-print(function.get("\.toLowerCase"),reserved.keys())
+print(function.get(".toLowerCase"),function.keys())
 print("EJEMPLOS\n")
 cadena= "let example = \"hello\";"
 cadena2= "a.toLowerCase()"
@@ -154,9 +154,9 @@ cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}","if(a>5)
 cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
 cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
 
-for example in cadenas:
-    printLex(example)
-    print("\n\n")
+#for example in cadenas:
+#    printLex(example)
+#    print("\n\n")
 
 # for example in cadenas1:
 #     printLex(example)
