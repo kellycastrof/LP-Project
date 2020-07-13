@@ -132,9 +132,18 @@ def p_type(p):
     '''type : VAR
     | LET'''
 
+def p_expresion_operacion(p):
+    '''expresion : expresion operador term'''
+
+def p_operador(p):
+    '''operador : MINUS
+    | PLUS
+    | DIVIDE
+    | TIMES
+    | MOD'''
+
 def p_expresion_term(p):
     'expresion : term'
-
 
 def p_term_factor(p):
     'term : factor'
