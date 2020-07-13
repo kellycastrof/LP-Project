@@ -15,6 +15,12 @@ def p_statements(p):
 def p_stm_asignacion(p):
     'stm : asignacion'
 
+def p_stm_asignacion_date(p):
+    'stm : asignacion_date'
+
+def p_stm_array(p):
+    'stm : array'
+
 def p_stm_expression(p):
     'stm : expresion'
 
@@ -66,8 +72,8 @@ def p_shift(p):
     | asignacion SHIFT LPAREN RPAREN'''
 
 def p_set_date(p):
-    '''setdate : ID SETDATE LPAREN NUMBER RPAREN
-    | asignacion SETDATE LPAREN NUMBER RPAREN'''
+    '''setdate : ID SETDATE LPAREN number RPAREN
+    | asignacion SETDATE LPAREN number RPAREN'''
 
 def p_get_full_year(p):
     '''getfullyear : ID GETFULLYEAR LPAREN RPAREN
@@ -100,8 +106,17 @@ def p_for(p):
 
 def p_asignacion(p):
     '''asignacion : ID EQUAL expresion
-    | declaracion
-    | asignacion_date'''
+    | declaracion'''
+
+def p_array(p):
+    '''array : type ID EQUAL LBRACKET RBRACKET
+    | type ID EQUAL LBRACKET arr_parametro RBRACKET
+    | type ID EQUAL NEW ARRAY LPAREN RPAREN
+    | type ID EQUAL NEW ARRAY LPAREN INTEGERP RPAREN'''
+
+def p_arr_parametro(p):
+    '''arr_parametro : expresion
+    | expresion COMMA arr_parametro'''
 
 def p_asignacion_new_date(p):
     '''asignacion_date : type ID EQUAL NEW DATE LPAREN RPAREN
@@ -112,10 +127,15 @@ def p_declaracion(p):
 
 def p_date_param(p):
     '''date_param : STRING 
-    | NUMBER
-    | NUMBER COMMA NUMBER
-    | NUMBER COMMA NUMBER COMMA NUMBER
+    | number
+    | number COMMA number
+    | number COMMA number COMMA number
     '''
+
+def p_number(p):
+    '''number : NUMBER
+    | INTEGERP
+    | INTEGERN'''
 
 def p_type(p):
     '''type : VAR

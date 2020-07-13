@@ -22,7 +22,7 @@ function = {
     '.shift':'SHIFT',
     '.setDate':'SETDATE', '.toString':'TOSTRING', '.getFullYear':'GETFULLYEAR',
     '.has':'HAS' ,  '.intersection':'INTERSECTION', '.union':'UNION',
-    'array':'ARRAY'
+    'Array':'ARRAY'
 }
 
 literals = ['{', '}']
@@ -32,7 +32,7 @@ tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", 
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
           "SEMICOLON", "POINT" , "COMMA", "NEWLINE", "LBRACE", "RBRACE",
-          "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
+          "NUMBER", "STRING", "INTEGERP", "INTEGERN"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
 t_MINUS = r'-'
@@ -40,7 +40,9 @@ t_PLUS = r'\+'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_MOD = r'%'
-t_NUMBER = r'-?[0-9]+(\.\d+)?'
+t_INTEGERP= r'[0-9]+'
+t_INTEGERN= r'-[0-9]+'
+t_NUMBER = r'-?[0-9]+(\.\d+)'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LBRACKET = r'\['
