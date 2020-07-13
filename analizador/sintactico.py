@@ -14,8 +14,10 @@ def p_statements(p):
 
 def p_stm_asignacion(p):
     'stm : asignacion'
+
 def p_stm_expression(p):
     'stm : expresion'
+
 def p_stm_metodos(p):
     'stm : metodos'
 
@@ -112,7 +114,19 @@ def p_for(p):
     '''for : FOR LPAREN type ID OF ID RPAREN LBRACE sentencias RBRACE'''
 
 def p_asignacion(p):
-    '''asignacion : type ID EQUAL expresion'''
+    '''asignacion : type ID EQUAL expresion
+    | asignacion_date'''
+
+def p_asignacion_new_date(p):
+    '''asignacion_date : type ID EQUAL NEW DATE LPAREN RPAREN
+    | type ID EQUAL NEW DATE LPAREN date_param RPAREN'''
+
+def p_date_param(p):
+    '''date_param : STRING 
+    | NUMBER
+    | NUMBER COMMA NUMBER
+    | NUMBER COMMA NUMBER COMMA NUMBER
+    '''
 
 def p_type(p):
     '''type : VAR

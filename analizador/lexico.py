@@ -7,7 +7,8 @@ reserved = {
     '||':'OR', '&&':'AND', '!':'NOT'  ,
     'true':'TRUE', 'false':'FALSE', 'null':'NULL',
     'function' : 'FUNCTION',
-    'of': 'OF'
+    'of': 'OF',
+    'Date': 'DATE'
 
 }
 
