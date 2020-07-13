@@ -85,24 +85,9 @@ def p_condicion(p):
     '''condicion : TRUE
     | FALSE
     | NOT expresion
-    | expresion EQUALS expresion
-    | expresion NOTEQUALS expresion
-    | expresion STRICTEQUALS expresion
-    | expresion MORETHAN expresion
-    | expresion LESSTHAN expresion
-    | expresion MORETHANEQUALS expresion
-    | expresion LESSTHANEQUALS expresion
-    | expresion STRICTNOTEQUALS expresion
-    | expresion OR expresion
-    | expresion AND expresion
-    | LPAREN condicion RPAREN EQUALS expresion
-    | LPAREN condicion RPAREN NOTEQUALS expresion
-    | LPAREN condicion RPAREN STRICTEQUALS expresion
-    | LPAREN condicion RPAREN MORETHAN expresion
-    | LPAREN condicion RPAREN LESSTHAN expresion
-    | LPAREN condicion RPAREN MORETHANEQUALS expresion
-    | LPAREN condicion RPAREN LESSTHANEQUALS expresion
-    | LPAREN condicion RPAREN STRICTNOTEQUALS expresion'''
+    | expresion operadorlogico expresion
+    | LPAREN condicion RPAREN operadorlogico expresion
+    | expresion operadorlogico LPAREN condicion RPAREN'''
 
 def p_else(p):
     'else : ELSE LBRACE sentencias RBRACE'
@@ -114,12 +99,16 @@ def p_for(p):
     '''for : FOR LPAREN type ID OF ID RPAREN LBRACE sentencias RBRACE'''
 
 def p_asignacion(p):
-    '''asignacion : type ID EQUAL expresion
+    '''asignacion : ID EQUAL expresion
+    | declaracion
     | asignacion_date'''
 
 def p_asignacion_new_date(p):
     '''asignacion_date : type ID EQUAL NEW DATE LPAREN RPAREN
     | type ID EQUAL NEW DATE LPAREN date_param RPAREN'''
+
+def p_declaracion(p):
+    '''declaracion : type ID EQUAL expresion'''
 
 def p_date_param(p):
     '''date_param : STRING 
@@ -146,6 +135,18 @@ def p_operador(p):
     | DIVIDE
     | TIMES
     | MOD'''
+
+def p_operador_logico(p):
+    '''operadorlogico : AND
+    | OR
+    | EQUALS
+    | NOTEQUALS
+    | STRICTEQUALS
+    | MORETHAN
+    | LESSTHAN
+    | MORETHANEQUALS
+    | LESSTHANEQUALS
+    | STRICTNOTEQUALS'''
 
 def p_expresion_term(p):
     'expresion : term'
