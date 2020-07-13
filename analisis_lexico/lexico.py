@@ -7,6 +7,7 @@ reserved = {
     '||':'OR', '&&':'AND', '!':'NOT'  ,
     'true':'TRUE', 'false':'FALSE', 'null':'NULL',
     'function' : 'FUNCTION',
+    'of': 'OF'
 
 }
 
@@ -123,36 +124,36 @@ analizadorL = lex.lex()
 ################## EJEMPLOS ###########
 print(function.get(".toLowerCase"),function.keys())
 print("EJEMPLOS\n")
-cadena= "let example = \"hello\";"
-cadena2= "a.toLowerCase()"
-cadena3 = "function hola(){hola=5}"
-cadena4 = "console.log(hola)"
-cadena5 = "var example = \"\""
-cadena6 = "example = 2"
-cadena7 = "true===1"
-cadena8 = "var arr = [1,2.5,3]"
-cadena9 = "carro = {\"llanta\",\"luces\"}"
+cadena= "let example = \"hello\" of;"
+# cadena2= "a.toLowerCase()"
+# cadena3 = "function hola(){hola=5}"
+# cadena4 = "console.log(hola)"
+# cadena5 = "var example = \"\""
+# cadena6 = "example = 2"
+# cadena7 = "true===1"
+# cadena8 = "var arr = [1,2.5,3]"
+# cadena9 = "carro = {\"llanta\",\"luces\"}"
 print(cadena)
 printLex(cadena)
-print("\n",cadena2)
-printLex(cadena2)
-print("\n",cadena3)
-printLex(cadena3)
-print("\n",cadena4)
-printLex(cadena4)
-print("\n",cadena5)
-printLex(cadena5)
-print("\n",cadena6)
-printLex(cadena6)
-print("\n",cadena7)
-printLex(cadena7)
-print("\n",cadena8)
-printLex(cadena8)
-print("\n",cadena9)
-printLex(cadena9)
-cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
-cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
-cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
+# print("\n",cadena2)
+# printLex(cadena2)
+# print("\n",cadena3)
+# printLex(cadena3)
+# print("\n",cadena4)
+# printLex(cadena4)
+# print("\n",cadena5)
+# printLex(cadena5)
+# print("\n",cadena6)
+# printLex(cadena6)
+# print("\n",cadena7)
+# printLex(cadena7)
+# print("\n",cadena8)
+# printLex(cadena8)
+# print("\n",cadena9)
+# printLex(cadena9)
+# cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
+# cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
+# cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
 
 #for example in cadenas:
 #    printLex(example)

@@ -5,7 +5,9 @@ tokens = lexico.tokens
 
 def p_sentencias(p):
     '''sentencias : statement
-    | if'''
+    | if
+    | for
+    | while'''
 
 def p_statements(p):
     'statement : stm'
@@ -22,7 +24,10 @@ def p_metodos(p):
     | touppercase
     | tolowercase
     | startwith
-    | tostring'''
+    | tostring
+    | pop
+    | push
+    | shift'''
 
 def p_imprimir(p):
     'imprimir : PRINT LPAREN factor RPAREN'
@@ -43,6 +48,21 @@ def p_start_with(p):
 def p_to_string(p):
     '''tostring : ID TOSTRING LPAREN RPAREN
         | asignacion TOSTRING LPAREN RPAREN '''
+
+def p_pop(p):
+    '''pop : ID POP LPAREN RPAREN
+    | asignacion POP LPAREN RPAREN'''
+
+def p_push(p):
+    '''push : ID PUSH LPAREN factor RPAREN
+    | asignacion PUSH LPAREN factor RPAREN'''
+
+def p_shift(p):
+    '''shift : ID SHIFT LPAREN RPAREN
+    | asignacion SHIFT LPAREN RPAREN'''
+
+def p_while(p):
+    '''while : WHILE LPAREN condicion RPAREN LBRACE sentencias RBRACE'''
 
 def p_if(p):
     '''if : IF LPAREN condicion RPAREN LBRACE sentencias RBRACE
@@ -76,13 +96,15 @@ def p_else(p):
 def p_else_if(p):
     'elseif : ELIF LPAREN condicion RPAREN LBRACE sentencias RBRACE else'
 
-
+def p_for(p):
+    '''for : FOR LPAREN type ID OF ID RPAREN LBRACE sentencias RBRACE'''
 
 def p_asignacion(p):
-    '''asignacion : ID EQUAL expresion
-        | VAR ID EQUAL expresion
-        | LET ID EQUAL expresion'''
+    '''asignacion : type ID EQUAL expresion'''
 
+def p_type(p):
+    '''type : VAR
+    | LET'''
 
 def p_expresion_term(p):
     'expresion : term'
@@ -92,7 +114,7 @@ def p_term_factor(p):
     'term : factor'
 
 def p_factor_id(p):
-    'term : ID'
+    'factor : ID'
 
 def p_factor_num(p):
     'factor : NUMBER'
