@@ -1,1 +1,5 @@
 analizador/__pycache__/
+analizador/*.out
+analizador/parsetab.py
+analizador/.idea/
+analizador/venv/
