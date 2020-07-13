@@ -27,7 +27,9 @@ def p_metodos(p):
     | tostring
     | pop
     | push
-    | shift'''
+    | shift
+    | setdate
+    | getfullyear'''
 
 def p_imprimir(p):
     'imprimir : PRINT LPAREN factor RPAREN'
@@ -61,6 +63,14 @@ def p_shift(p):
     '''shift : ID SHIFT LPAREN RPAREN
     | asignacion SHIFT LPAREN RPAREN'''
 
+def p_set_date(p):
+    '''setdate : ID SETDATE LPAREN NUMBER RPAREN
+    | asignacion SETDATE LPAREN NUMBER RPAREN'''
+
+def p_get_full_year(p):
+    '''getfullyear : ID GETFULLYEAR LPAREN RPAREN
+    | asignacion GETFULLYEAR LPAREN RPAREN'''
+
 def p_while(p):
     '''while : WHILE LPAREN condicion RPAREN LBRACE sentencias RBRACE'''
 
@@ -81,6 +91,8 @@ def p_condicion(p):
     | expresion MORETHANEQUALS expresion
     | expresion LESSTHANEQUALS expresion
     | expresion STRICTNOTEQUALS expresion
+    | expresion OR expresion
+    | expresion AND expresion
     | LPAREN condicion RPAREN EQUALS expresion
     | LPAREN condicion RPAREN NOTEQUALS expresion
     | LPAREN condicion RPAREN STRICTEQUALS expresion
