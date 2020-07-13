@@ -133,7 +133,12 @@ def p_type(p):
     | LET'''
 
 def p_expresion_operacion(p):
-    '''expresion : expresion operador term'''
+    '''expresion : expresion operador term
+    | expresion operador expresion_entre_paren
+    | expresion_entre_paren'''
+
+def p_expresion_entre_paren(p):
+    '''expresion_entre_paren : LPAREN expresion operador term RPAREN'''
 
 def p_operador(p):
     '''operador : MINUS
