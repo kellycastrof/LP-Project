@@ -69,8 +69,6 @@ t_COMMA = r'\,'
 t_STRING= r'[\'\"].*[\'\"]'
 
 
-
-
 t_ignore = ' \t'
 
 
