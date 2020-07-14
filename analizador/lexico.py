@@ -22,7 +22,8 @@ function = {
     '.shift':'SHIFT',
     '.setDate':'SETDATE', '.toString':'TOSTRING', '.getFullYear':'GETFULLYEAR',
     '.has':'HAS' ,  '.intersection':'INTERSECTION', '.union':'UNION',
-    'Array':'ARRAY'
+    'Array':'ARRAY',
+    'Set': 'SET'
 }
 
 literals = ['{', '}']
@@ -31,8 +32,8 @@ literals = ['{', '}']
 tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", "EQUAL",
           "LBRACKET","RBRACKET","EQUALS","NOTEQUALS","MORETHAN","LESSTHAN",
           "MORETHANEQUALS","LESSTHANEQUALS","STRICTEQUALS","STRICTNOTEQUALS",
-          "SEMICOLON", "POINT" , "COMMA", "NEWLINE", "LBRACE", "RBRACE",
-          "NUMBER", "STRING", "INTEGERP", "INTEGERN"] + list(reserved.values()) + list(function.values())
+          "SEMICOLON", "COMMA", "NEWLINE", "LBRACE", "RBRACE",
+          "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
 t_MINUS = r'-'
@@ -40,9 +41,7 @@ t_PLUS = r'\+'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_MOD = r'%'
-t_INTEGERP= r'[0-9]+'
-t_INTEGERN= r'-[0-9]+'
-t_NUMBER = r'-?[0-9]+(\.\d+)'
+t_NUMBER = r'-?[0-9]+(\.\d+)*'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LBRACKET = r'\['
@@ -66,7 +65,6 @@ t_OR = r'\|\|'
 t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
-t_POINT = r'\.'
 t_COMMA = r'\,'
 t_STRING= r'[\'\"].*[\'\"]'
 
@@ -127,7 +125,7 @@ analizadorL = lex.lex()
 ################## EJEMPLOS ###########
 print(function.get(".toLowerCase"),function.keys())
 print("EJEMPLOS\n")
-cadena= "let example = \"hello\" of;"
+cadena= "let example = \"hello\" of 5;"
 # cadena2= "a.toLowerCase()"
 # cadena3 = "function hola(){hola=5}"
 # cadena4 = "console.log(hola)"
