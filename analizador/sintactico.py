@@ -10,7 +10,8 @@ def p_sentencias(p):
     | while'''
 
 def p_statements(p):
-    'statement : stm'
+    '''statement : stm
+    | stm SEMICOLON'''
 
 def p_stm_asignacion(p):
     'stm : asignacion'
@@ -18,8 +19,12 @@ def p_stm_asignacion(p):
 def p_stm_asignacion_date(p):
     'stm : asignacion_date'
 
+
 def p_stm_array(p):
     'stm : array'
+
+def p_stm_set(p):
+    'stm : set'
 
 def p_stm_expression(p):
     'stm : expresion'
@@ -37,47 +42,63 @@ def p_metodos(p):
     | push
     | shift
     | setdate
-    | getfullyear'''
+    | getfullyear
+    | has
+    | intersection
+    | union'''
 
 def p_imprimir(p):
     'imprimir : PRINT LPAREN factor RPAREN'
 
 def p_to_upper_case(p):
     '''touppercase : ID TOUPPERCASE LPAREN RPAREN
-    | asignacion TOUPPERCASE LPAREN RPAREN '''
+    | type ID EQUAL ID TOUPPERCASE LPAREN RPAREN'''
 
 
 def p_to_lower_case(p):
     '''tolowercase : ID TOLOWERCASE LPAREN RPAREN
-    | asignacion TOLOWERCASE LPAREN RPAREN'''
+    | type ID EQUAL ID  TOLOWERCASE LPAREN RPAREN'''
 
 def p_start_with(p):
     '''startwith : ID STARTSWITH LPAREN STRING RPAREN
-    | asignacion STARTSWITH LPAREN RPAREN '''
+    | type ID EQUAL ID STARTSWITH LPAREN STRING RPAREN'''
 
 def p_to_string(p):
     '''tostring : ID TOSTRING LPAREN RPAREN
-        | asignacion TOSTRING LPAREN RPAREN '''
+        | type ID EQUAL ID  TOSTRING LPAREN RPAREN'''
 
 def p_pop(p):
     '''pop : ID POP LPAREN RPAREN
-    | asignacion POP LPAREN RPAREN'''
+    | type ID EQUAL ID POP LPAREN RPAREN'''
 
 def p_push(p):
     '''push : ID PUSH LPAREN factor RPAREN
-    | asignacion PUSH LPAREN factor RPAREN'''
+    | type ID EQUAL ID PUSH LPAREN factor RPAREN'''
 
 def p_shift(p):
     '''shift : ID SHIFT LPAREN RPAREN
-    | asignacion SHIFT LPAREN RPAREN'''
+    | type ID EQUAL ID SHIFT LPAREN RPAREN'''
 
 def p_set_date(p):
-    '''setdate : ID SETDATE LPAREN number RPAREN
-    | asignacion SETDATE LPAREN number RPAREN'''
+    '''setdate : ID SETDATE LPAREN NUMBER RPAREN
+    | type ID EQUAL ID SETDATE LPAREN NUMBER RPAREN'''
 
 def p_get_full_year(p):
     '''getfullyear : ID GETFULLYEAR LPAREN RPAREN
-    | asignacion GETFULLYEAR LPAREN RPAREN'''
+    | type ID EQUAL ID GETFULLYEAR LPAREN RPAREN'''
+
+def p_has(p):
+    '''has : ID HAS LPAREN factor RPAREN
+    | type ID EQUAL ID HAS LPAREN factor RPAREN'''
+
+def p_intersection(p):
+    '''intersection : ID INTERSECTION LPAREN set_parametro RPAREN
+    | type ID EQUAL ID INTERSECTION LPAREN set_parametro RPAREN'''
+
+def p_union(p):
+    '''union : ID UNION LPAREN set_parametro RPAREN
+    | type ID EQUAL ID UNION LPAREN set_parametro RPAREN'''
+
 
 def p_while(p):
     '''while : WHILE LPAREN condicion RPAREN LBRACE sentencias RBRACE'''
@@ -108,34 +129,39 @@ def p_asignacion(p):
     '''asignacion : ID EQUAL expresion
     | declaracion'''
 
-def p_array(p):
-    '''array : type ID EQUAL LBRACKET RBRACKET
-    | type ID EQUAL LBRACKET arr_parametro RBRACKET
-    | type ID EQUAL NEW ARRAY LPAREN RPAREN
-    | type ID EQUAL NEW ARRAY LPAREN INTEGERP RPAREN'''
 
-def p_arr_parametro(p):
-    '''arr_parametro : expresion
-    | expresion COMMA arr_parametro'''
 
 def p_asignacion_new_date(p):
     '''asignacion_date : type ID EQUAL NEW DATE LPAREN RPAREN
     | type ID EQUAL NEW DATE LPAREN date_param RPAREN'''
 
+def p_array(p):
+    '''array : type ID EQUAL LBRACKET RBRACKET
+    | type ID EQUAL LBRACKET arr_parametro RBRACKET'''
+
+
+def p_set(p):
+    '''set : type ID EQUAL NEW SET LPAREN RPAREN
+    | type ID EQUAL NEW SET LPAREN set_parametro RPAREN'''
+
+def p_arr_parametro(p):
+    '''arr_parametro : expresion
+    | expresion COMMA arr_parametro'''
+
+def p_set_parametro(p):
+    '''set_parametro : LBRACKET arr_parametro RBRACKET
+    | ID'''
+
 def p_declaracion(p):
     '''declaracion : type ID EQUAL expresion'''
 
 def p_date_param(p):
-    '''date_param : STRING 
-    | number
-    | number COMMA number
-    | number COMMA number COMMA number
+    '''date_param : STRING
+    | NUMBER
+    | NUMBER COMMA NUMBER
+    | NUMBER COMMA NUMBER COMMA NUMBER
     '''
 
-def p_number(p):
-    '''number : NUMBER
-    | INTEGERP
-    | INTEGERN'''
 
 def p_type(p):
     '''type : VAR
@@ -190,7 +216,9 @@ def p_factor_bool(p):
 
 #Error Generado
 def p_error(p):
-    print("No se ha reconocido en el analisis sintactico {}".format(p))
+    if p != None:
+        token = "Token {} ({}) En la linea {}".format(p.type, p.value, p.lineno)
+        print("Syntax error: Inesperado {}".format(token))
 
 
 parser=sintaxis.yacc()
