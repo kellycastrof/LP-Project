@@ -66,11 +66,9 @@ t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
 t_COMMA = r'\,'
-t_STRING= r'[\'\"].*[\'\"]'
-
+t_STRING= r'[\"][A-Za-z0-9]+[\"] | [\'][A-Za-z0-9]+[\']'
 
 t_ignore = ' \t'
-
 
 def t_lbrace(t):
     r'\{'
@@ -84,7 +82,7 @@ def t_rbrace(t):
 
 def t_newLine(t):
     r'\n+'
-    t.lexer.lineno += len(t.value)
+    t.lexer.lineno += (t.value.count("\n") + 1)
     t.type = "NEWLINE"
 
 def t_PRINT(t):
@@ -123,7 +121,8 @@ analizadorL = lex.lex()
 ################## EJEMPLOS ###########
 print(function.get(".toLowerCase"),function.keys())
 print("EJEMPLOS\n")
-cadena= "let example = \"hello\" of 5;"
+# cadena= "let example = \"hello\" of 5;"
+cadena="if(a>5){\nb=5}"
 # cadena2= "a.toLowerCase()"
 # cadena3 = "function hola(){hola=5}"
 # cadena4 = "console.log(hola)"
@@ -150,13 +149,13 @@ printLex(cadena)
 # printLex(cadena8)
 # print("\n",cadena9)
 # printLex(cadena9)
-# cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){b=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
+cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){\nb=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
 # cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
 # cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
 
-#for example in cadenas:
-#    printLex(example)
-#    print("\n\n")
+for example in cadenas:
+   printLex(example)
+   print("\n\n")
 
 # for example in cadenas1:
 #     printLex(example)
