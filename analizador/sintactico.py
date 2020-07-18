@@ -50,6 +50,8 @@ def p_metodos(p):
 def p_imprimir(p):
     'imprimir : PRINT LPAREN factor RPAREN'
 
+
+
 def p_to_upper_case(p):
     '''touppercase : ID TOUPPERCASE LPAREN RPAREN
     | type ID EQUAL ID TOUPPERCASE LPAREN RPAREN'''
@@ -128,8 +130,6 @@ def p_for(p):
 def p_asignacion(p):
     '''asignacion : ID EQUAL expresion
     | declaracion'''
-
-
 
 def p_asignacion_new_date(p):
     '''asignacion_date : type ID EQUAL NEW DATE LPAREN RPAREN
@@ -222,12 +222,16 @@ def p_error(p):
 
 
 parser=sintaxis.yacc()
-
+# if(a>5){\nvar let=2}
+# if(a>5){\nvar a=2\nvar var=4}
+# if(a>5){\nconsole.log("hola")\n}else{\nconsole.log(adios)\n}
 while True:
     try:
         s = input('JavaScript > ')
     except EOFError:
         break
     if not s: continue
-    result = parser.parse(s)
+    result = parser.parse(s,tracking=True)
     print(result)
+    break
+
