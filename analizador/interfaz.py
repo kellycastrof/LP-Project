@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5.QtWidgets import QApplication #ventana
 from PyQt5.QtWidgets import QLabel #diseño de la ventana
 from PyQt5.QtWidgets import QWidget #componentes
@@ -126,11 +127,27 @@ def window():
         print(tokens)
         labelAnalisis.setText('Processing!')
 
+    def f_lexico():
+        print('initiating lexer.py')
+        currentPath = os.curdir
+        filePath = currentPath + '/lexico.py'
+        os.system('python ' + filePath)
+        print('lexer.py finished')
+
+    def f_sintactico():
+        print('initiating sintactico.py')
+        currentPath = os.curdir
+        filePath = currentPath + '/sintactico.py'
+        os.system('python ' + filePath)
+        print('sintactico.py finished')
+
     #Buttons
 
     buttonLexer = QPushButton("Léxico")
-    buttonLexer.clicked.connect(change_text)
+    buttonLexer.clicked.connect(f_lexico)
     buttonSintactico = QPushButton("Sintáctico")
+    buttonSintactico.clicked.connect(f_sintactico)
+
 
     #Cuadro de texto donde se visualiza el resultado
     resultLabel = QLabel('<h6>Result: </h6>')
