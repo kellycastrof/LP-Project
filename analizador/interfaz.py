@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 from PyQt5.QtWidgets import QApplication #ventana
 from PyQt5.QtWidgets import QLabel #diseño de la ventana
 from PyQt5.QtWidgets import QWidget #componentes
@@ -11,6 +12,10 @@ from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtCore import Qt, QRect, QSize
 from PyQt5.QtWidgets import QTextEdit
 from PyQt5.QtGui import QColor, QPainter, QTextFormat
+
+def analizador_exec(command):
+    return subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
+
 
 class QLineNumberArea(QWidget):
     def __init__(self, editor):
@@ -119,7 +124,7 @@ def window():
 
     #Connection effect
     tokens = []
-    def change_text(event):
+    def change_text():
         if len(tokens)>0:
             tokens.pop()
         tokens.append(codeEditor.toPlainText())
@@ -128,11 +133,16 @@ def window():
         labelAnalisis.setText('Processing!')
 
     def f_lexico():
-        print('initiating lexer.py')
+        f = open("data.txt", "w")
+        f.write(codeEditor.toPlainText())
+        f.close()
         currentPath = os.curdir
         filePath = currentPath + '/lexico.py'
-        os.system('python ' + filePath)
+        cmd = "py " + filePath
+        print('initiating lexer.py')
+        resultTextArea.append(analizador_exec(cmd))
         print('lexer.py finished')
+        
 
     def f_sintactico():
         print('initiating sintactico.py')
@@ -140,6 +150,9 @@ def window():
         filePath = currentPath + '/sintactico.py'
         os.system('python ' + filePath)
         print('sintactico.py finished')
+        
+    def f_sintactico1():
+        resultTextArea.append("hola")
 
     #Buttons
 
@@ -151,7 +164,13 @@ def window():
 
     #Cuadro de texto donde se visualiza el resultado
     resultLabel = QLabel('<h6>Result: </h6>')
-    resultTextArea = QPlainTextEdit()
+    resultTextArea = QTextEdit()
+    resultTextArea.setReadOnly(True)
+
+    font = resultTextArea.font()
+    font.setFamily("Courier")
+    font.setPointSize(10)
+
 
     #LAYOUTS:
 

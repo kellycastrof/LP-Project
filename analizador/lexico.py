@@ -103,6 +103,8 @@ def t_ID(t):
     return t
 
 def printLex(cadena):
+    with open('data.txt','r') as file:
+        cadena += file.read()
     analizador=lex.lex()
     analizador.input(cadena)
     for tok in analizador:
@@ -118,11 +120,12 @@ def t_error(t):
     t.lexer.skip(1)
 
 analizadorL = lex.lex()
+printLex("")
 ################## EJEMPLOS ###########
-print(function.get(".toLowerCase"),function.keys())
-print("EJEMPLOS\n")
+#print(function.get(".toLowerCase"),function.keys())
+#print("EJEMPLOS\n")
 # cadena= "let example = \"hello\" of 5;"
-cadena="if(a>5){\nb=5}"
+#cadena="if(a>5){\nb=5}"
 # cadena2= "a.toLowerCase()"
 # cadena3 = "function hola(){hola=5}"
 # cadena4 = "console.log(hola)"
@@ -131,8 +134,8 @@ cadena="if(a>5){\nb=5}"
 # cadena7 = "true===1"
 # cadena8 = "var arr = [1,2.5,3]"
 # cadena9 = "carro = {\"llanta\",\"luces\"}"
-print(cadena)
-printLex(cadena)
+#print(cadena)
+#printLex(cadena)
 # print("\n",cadena2)
 # printLex(cadena2)
 # print("\n",cadena3)
@@ -149,14 +152,14 @@ printLex(cadena)
 # printLex(cadena8)
 # print("\n",cadena9)
 # printLex(cadena9)
-cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){\nb=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
+#cadenas =["let  example = \"hello\";", "a.toLowerCase()","if(a>5){\nb=5}","if(a>5){hola}else if{adios}else{adios de nuveo}" ]
 # cadenas1 = ["function hola(){hola=5}","console.log(hola)", "let array = [1,2,4]" ]
 # cadenas2=["var cambio= texto.startsWith(\"Este\");", "var ultimo= a.pop();", "var texto= fecha.toString();"]
-
+'''
 for example in cadenas:
    printLex(example)
    print("\n\n")
-
+'''
 # for example in cadenas1:
 #     printLex(example)
 #     print("\n\n")
