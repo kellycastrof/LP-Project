@@ -41,7 +41,7 @@ t_PLUS = r'\+'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_MOD = r'%'
-t_NUMBER = r'-?[0-9]+(\.\d+)*'
+t_NUMBER = r'-?[0-9]+(\.\d+)?'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LBRACKET = r'\['
@@ -91,7 +91,7 @@ def t_PRINT(t):
     return t
 
 def t_ID(t):
-    r'[a-zA-Z_\$\.][a-zA-Z_0-9\$]*'
+    r'[$_]?[a-zA-Z][a-zA-Z_0-9\$]*'
     #t.value = t.value.encode('unicode_escape')
     #t.value = t.value.replace(".","\.")
     if reserved.get(t.value)!=None:
@@ -103,13 +103,18 @@ def t_ID(t):
     return t
 
 def printLex(cadena):
-    with open('data.txt','r') as file:
-        cadena += file.read()
-    analizador=lex.lex()
+    try:
+        with open('data.txt','r') as file:
+            cadena += file.read()
+        print_Lexer(cadena)
+    except:
+        print_Lexer(cadena)
+
+def print_Lexer(cadena):
+    analizador = lex.lex()
     analizador.input(cadena)
     for tok in analizador:
         print(tok)
-
 
 def t_COMMENT(t):
      r'(\/\/.*)|(\/\*.*\*\/)'
@@ -119,8 +124,8 @@ def t_error(t):
     print("No se ha reconocido en lexico {}".format(t.value[0]))
     t.lexer.skip(1)
 
-analizadorL = lex.lex()
-printLex("")
+#analizadorL = lex.lex()
+#printLex("")
 ################## EJEMPLOS ###########
 #print(function.get(".toLowerCase"),function.keys())
 #print("EJEMPLOS\n")

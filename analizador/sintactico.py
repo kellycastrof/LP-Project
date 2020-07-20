@@ -216,9 +216,11 @@ def p_factor_bool(p):
 
 #Error Generado
 def p_error(p):
-    if p != None:
+    try:
         token = "Token {} ({}) En la linea {}".format(p.type, p.value, p.lineno)
         print("Syntax error: Inesperado {}".format(token))
+    except:
+        print("Sytax error: Inesperado {} En la linea 1 ".format(p))
 
 
 parser=sintaxis.yacc()
