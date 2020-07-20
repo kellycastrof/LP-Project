@@ -223,17 +223,37 @@ def p_error(p):
         print("Sytax error: Inesperado {} En la linea 1 ".format(p))
 
 
-parser=sintaxis.yacc()
-# if(a>5){\nvar let=2}
-# if(a>5){\nvar a=2\nvar var=4}
-# if(a>5){\nconsole.log("hola")\n}else{\nconsole.log(adios)\n}
-while True:
+
+def analisis_sintactico():
     try:
-        s = input('JavaScript > ')
-    except EOFError:
+        with open('data.txt','r') as file:
+            cadena = file.read()
+        print_Yacc(cadena)
+    except:
+        print("AQUI")
+        parser_Console()
+
+def print_Yacc(cadena):
+    parser = sintaxis.yacc()
+    while True:
+        if not cadena: continue
+        result = parser.parse(cadena)
+        print(result)
         break
-    if not s: continue
-    result = parser.parse(s,tracking=True)
-    print(result)
-    break
+
+
+def parser_Console():
+    parser=sintaxis.yacc()
+    while True:
+        try:
+            s = input('JavaScript > ')
+        except EOFError:
+            break
+        if not s: continue
+        result = parser.parse(s)
+        print(result)
+        break
+
+
+analisis_sintactico()
 

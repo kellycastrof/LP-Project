@@ -19,7 +19,7 @@ def analizador_exec(command):
 def read_output():
     cadena = ""
     with open('output.txt','r') as file:
-        cadena += file.read()
+        cadena = file.read()
     return cadena
 
 class QLineNumberArea(QWidget):
@@ -150,17 +150,22 @@ def window():
         print('initiating lexer.py')
         os.system(cmd)
         print('lexer.py finished')
-        resultTextArea.append(read_output())
+        resultTextArea.setText(read_output())
         
 
     def f_sintactico():
         if codeEditor.toPlainText() == "":
             resultTextArea.insertHtml('<p style="color: red">Nada que analizar</p><br>')
             return
+        f = open("data.txt", "w")
+        f.write(codeEditor.toPlainText())
+        f.close()
         print('initiating sintactico.py')
         currentPath = os.curdir
         filePath = currentPath + '/sintactico.py'
+        cmd = "py " + filePath
         os.system('python ' + filePath)
+        resultTextArea.setText(analizador_exec(cmd))
         print('sintactico.py finished')
         
     def f_sintactico1():

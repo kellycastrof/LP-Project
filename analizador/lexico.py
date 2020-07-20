@@ -84,6 +84,8 @@ def t_newLine(t):
     r'\n+'
     t.lexer.lineno += (t.value.count("\n") + 1)
     t.type = "NEWLINE"
+    #pass
+
 
 def t_PRINT(t):
     r'console\.log'
@@ -124,8 +126,8 @@ def t_error(t):
     print("No se ha reconocido en lexico {}".format(t.value[0]))
     t.lexer.skip(1)
 
-#analizadorL = lex.lex()
-#printLex("")
+analizadorL = lex.lex()
+printLex("")
 ################## EJEMPLOS ###########
 #print(function.get(".toLowerCase"),function.keys())
 #print("EJEMPLOS\n")
