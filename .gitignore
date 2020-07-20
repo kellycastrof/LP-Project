@@ -3,3 +3,4 @@ analizador/*.out
 analizador/parsetab.py
 analizador/.idea/
 analizador/venv/
+analizador/data.txt
