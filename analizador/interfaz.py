@@ -16,6 +16,11 @@ from PyQt5.QtGui import QColor, QPainter, QTextFormat
 def analizador_exec(command):
     return subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
 
+def read_output():
+    cadena = ""
+    with open('output.txt','r') as file:
+        cadena += file.read()
+    return cadena
 
 class QLineNumberArea(QWidget):
     def __init__(self, editor):
@@ -141,10 +146,11 @@ def window():
         f.close()
         currentPath = os.curdir
         filePath = currentPath + '/lexico.py'
-        cmd = "py " + filePath
+        cmd = "py " + filePath + " > output.txt"
         print('initiating lexer.py')
-        resultTextArea.append(analizador_exec(cmd))
+        os.system(cmd)
         print('lexer.py finished')
+        resultTextArea.append(read_output())
         
 
     def f_sintactico():
