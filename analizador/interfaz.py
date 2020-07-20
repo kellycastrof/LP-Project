@@ -148,6 +148,9 @@ def window():
         
 
     def f_sintactico():
+        if codeEditor.toPlainText() == "":
+            resultTextArea.insertHtml('<p style="color: red">Nada que analizar</p><br>')
+            return
         print('initiating sintactico.py')
         currentPath = os.curdir
         filePath = currentPath + '/sintactico.py'
