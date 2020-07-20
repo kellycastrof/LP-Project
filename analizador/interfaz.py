@@ -133,6 +133,9 @@ def window():
         labelAnalisis.setText('Processing!')
 
     def f_lexico():
+        if codeEditor.toPlainText() == "":
+            resultTextArea.insertHtml('<p style="color: red">Nada que analizar</p><br>')
+            return
         f = open("data.txt", "w")
         f.write(codeEditor.toPlainText())
         f.close()
