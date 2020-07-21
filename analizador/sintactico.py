@@ -220,7 +220,7 @@ def p_error(p):
         token = "Token {} ({}) En la linea {}".format(p.type, p.value, p.lineno)
         print("Syntax error: Inesperado {}".format(token))
     except:
-        print("Sytax error: Inesperado {} En la linea 1 ".format(p))
+        print("{}".format(p.type))
 
 
 
@@ -237,7 +237,7 @@ def print_Yacc(cadena):
     parser = sintaxis.yacc()
     while True:
         if not cadena: continue
-        result = parser.parse(cadena)
+        result = parser.parse(cadena,tracking=True)
         print(result)
         break
 
@@ -250,10 +250,9 @@ def parser_Console():
         except EOFError:
             break
         if not s: continue
-        result = parser.parse(s)
+        result = parser.parse(s,tracking=True)
         print(result)
         break
 
 
 analisis_sintactico()
-
