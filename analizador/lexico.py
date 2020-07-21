@@ -14,14 +14,14 @@ reserved = {
 
 #RESERVED FUNCTION NAMES
 function = {
-    '.toUpperCase':'TOUPPERCASE',
-    '.toLowerCase': 'TOLOWERCASE',
-    '.startsWith': 'STARTSWITH',
-    '.pop':'POP',
-    '.push':'PUSH',
-    '.shift':'SHIFT',
-    '.setDate':'SETDATE', '.toString':'TOSTRING', '.getFullYear':'GETFULLYEAR',
-    '.has':'HAS' ,  '.intersection':'INTERSECTION', '.union':'UNION',
+    '\.toUpperCase':'TOUPPERCASE',
+    '\.toLowerCase': 'TOLOWERCASE',
+    '\.startsWith': 'STARTSWITH',
+    '\.pop':'POP',
+    '\.push':'PUSH',
+    '\.shift':'SHIFT',
+    '\.setDate':'SETDATE', '\.toString':'TOSTRING', '\.getFullYear':'GETFULLYEAR',
+    '\.has':'HAS' ,  '\.intersection':'INTERSECTION', '\.union':'UNION',
     'Array':'ARRAY',
     'Set': 'SET'
 }
@@ -36,6 +36,18 @@ tokens = ["PRINT","MINUS","PLUS","TIMES","DIVIDE","MOD","LPAREN","RPAREN","ID", 
           "NUMBER", "STRING"] + list(reserved.values()) + list(function.values())
 
 #REGEX OF TOKENS
+t_TOUPPERCASE = r'.toUpperCase'
+t_TOLOWERCASE = r'.toLowerCase'
+t_STARTSWITH = r'.startsWith'
+t_POP = r'.pop'
+t_PUSH = r'.push'
+t_SHIFT = r'.shift'
+t_SETDATE = r'.setDate'
+t_TOSTRING = r'.toString'
+t_GETFULLYEAR = r'.getFullYear'
+t_HAS = r'.has'
+t_INTERSECTION = r'.intersection'
+t_UNION = r'.union'
 t_MINUS = r'-'
 t_PLUS = r'\+'
 t_TIMES = r'\*'
@@ -66,7 +78,7 @@ t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
 t_COMMA = r'\,'
-t_STRING= r'[\"][A-Za-z0-9]+[\"] | [\'][A-Za-z0-9]+[\']'
+t_STRING= r'[\"][A-Za-z0-9\s\.\,\:]+[\"] | [\'][A-Za-z0-9\s\.\,\:]+[\']'
 
 t_ignore = ' \t'
 
