@@ -116,7 +116,8 @@ def p_condicion(p):
     | NOT expresion
     | expresion operadorlogico expresion
     | LPAREN condicion RPAREN operadorlogico expresion
-    | expresion operadorlogico LPAREN condicion RPAREN'''
+    | expresion operadorlogico LPAREN condicion RPAREN
+    | expresion operador_comparison expresion'''
 
 def p_else(p):
     'else : ELSE LBRACE sentencias RBRACE'
@@ -168,12 +169,8 @@ def p_type(p):
     | LET'''
 
 def p_expresion_operacion(p):
-    '''expresion : expresion operador term
-    | expresion operador expresion_entre_paren
-    | expresion_entre_paren'''
+    '''expresion : NUMBER operador NUMBER'''
 
-def p_expresion_entre_paren(p):
-    '''expresion_entre_paren : LPAREN expresion operador term RPAREN'''
 
 def p_operador(p):
     '''operador : MINUS
@@ -182,17 +179,21 @@ def p_operador(p):
     | TIMES
     | MOD'''
 
+
 def p_operador_logico(p):
-    '''operadorlogico : AND
-    | OR
-    | EQUALS
-    | NOTEQUALS
-    | STRICTEQUALS
-    | MORETHAN
-    | LESSTHAN
-    | MORETHANEQUALS
-    | LESSTHANEQUALS
-    | STRICTNOTEQUALS'''
+     '''operadorlogico : EQUALS
+     | NOTEQUALS
+     | STRICTEQUALS
+     | MORETHAN
+     | LESSTHAN
+     | MORETHANEQUALS
+     | LESSTHANEQUALS
+     | STRICTNOTEQUALS'''
+
+def p_operador_comparison(p):
+     '''operador_comparison : AND
+     | OR'''
+
 
 def p_expresion_term(p):
     'expresion : term'
@@ -220,7 +221,10 @@ def p_error(p):
         token = "Token {} ({}) En la linea {}".format(p.type, p.value, p.lineno)
         print("Syntax error: Inesperado {}".format(token))
     except:
-        print("{}".format(p.type))
+        if p == None:
+            print("Su sentencia está incompleta")
+        else:
+            print("Sytax error: Inesperado {} En la linea 1 ".format(p))
 
 
 
@@ -230,7 +234,6 @@ def analisis_sintactico():
             cadena = file.read()
         print_Yacc(cadena)
     except:
-        print("AQUI")
         parser_Console()
 
 def print_Yacc(cadena):
@@ -255,4 +258,4 @@ def parser_Console():
         break
 
 
-analisis_sintactico()
+parser_Console()
