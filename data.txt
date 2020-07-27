@@ -1,0 +1,40 @@
+let msg = 'Hola, el dia de hoy es';
+let names = ['Kelly Castro', 'Erick Pulla', 'ScriptVaders'];
+var navances = [0, 1, 2, 'Final'];
+var numero = 4;
+var date = new Date();
+var anio = date.getFullYear();
+var team = names.pop();
+names.push('Carlos Carvajal');
+date.setDate(21);
+let fechaText = date.toString();
+console.log('Los Miembros del team son:');
+for (let members of names) {
+ console.log(members);
+}
+var i = 0;
+console.log('Los Avances entregados para este proyecto fueron ');
+while (i < n) {
+ console.log('Avance');
+ i = 1 + 1;
+}
+let msgbueno = 'Todos los informes fueron entregados';
+let msgregular = 'Un informe no fue entregado ';
+console.log('Status de los Reportes:');
+if (n === 4) {
+ console.log(msgBueno.toUpperCase());
+} else if (navances >= 3 && navances < 4) {
+ msgRegular.toLowerCase();
+} else {
+ console.log('Ya valimos en las entregas de informes ');
+}
+console.log('Conjuntos ');
+let setA = new Set([1, 2, 3, 4]);
+setA.has(1);
+setA.has(5);
+setA.has(2);
+let setB = new Set([3, 4, 5, 6, 90]);
+setB.has(1);
+setB.has(2);
+setB.intersection([3, 4]);
+setA.union([1, 2, 3]);

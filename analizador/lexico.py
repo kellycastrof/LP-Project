@@ -1,16 +1,22 @@
 import ply.lex as lex
 #RESERVED WORDS
 reserved = {
-    'var': 'VAR', 'let':'LET' ,
+    'var': 'VAR', 'let':'LET' , 'const' : 'CONST',
     'new':'NEW',
-    'else if':'ELIF', 'if':'IF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
+    'if':'IF', 'else':'ELSE', 'while':'WHILE', 'for':'FOR',
     '||':'OR', '&&':'AND', '!':'NOT'  ,
-    'true':'TRUE', 'false':'FALSE', 'null':'NULL',
-    'function' : 'FUNCTION',
+    'true':'TRUE', 'false':'FALSE',
     'of': 'OF',
-    'Date': 'DATE'
-
+    'Date': 'DATE',
+    'Map' : 'MAP'
 }
+
+# const myMap = new Map([
+#    ["key1", "value1"],
+#    ["key2", "value2"]
+# ]);
+# console.log(myMap.has("key1"))
+# console.log(myMap.has("key3"))
 
 #RESERVED FUNCTION NAMES
 function = {
@@ -22,7 +28,6 @@ function = {
     '\.shift':'SHIFT',
     '\.setDate':'SETDATE', '\.toString':'TOSTRING', '\.getFullYear':'GETFULLYEAR',
     '\.has':'HAS' ,  '\.intersection':'INTERSECTION', '\.union':'UNION',
-    'Array':'ARRAY',
     'Set': 'SET'
 }
 
@@ -70,7 +75,6 @@ t_STRICTNOTEQUALS = r'\!\=\='
 t_IF = r'if'
 t_FOR = r'for'
 t_WHILE = r'while'
-t_ELIF = r'else if'
 t_ELSE = r'else'
 t_NEW = r'new'
 t_OR = r'\|\|'
@@ -78,7 +82,7 @@ t_AND = r'\&\&'
 t_NOT = r'!'
 t_SEMICOLON = r';'
 t_COMMA = r'\,'
-t_STRING= r'[\"][A-Za-z0-9\s\.\,\:]+[\"] | [\'][A-Za-z0-9\s\.\,\:]+[\']'
+t_STRING= r'[\"][A-Za-z0-9\s\.\,\:\-]+[\"] | [\'][A-Za-z0-9\s\.\,\:\-]+[\']'
 
 t_ignore = ' \t'
 
@@ -95,7 +99,7 @@ def t_rbrace(t):
 def t_newLine(t):
     r'\n+'
     t.lexer.lineno += (t.value.count("\n") + 1)
-    t.type = "NEWLINE"
+    #t.type = "NEWLINE"
     #pass
 
 

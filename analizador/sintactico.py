@@ -7,7 +7,11 @@ def p_sentencias(p):
     '''sentencias : statement
     | if
     | for
-    | while'''
+    | while
+    | statement sentencias
+    | if sentencias
+    | while sentencias
+    | for sentencias'''
 
 def p_statements(p):
     '''statement : stm
@@ -22,6 +26,9 @@ def p_stm_asignacion_date(p):
 
 def p_stm_array(p):
     'stm : array'
+
+def p_stm_map(p):
+    'stm : mapa'
 
 def p_stm_set(p):
     'stm : set'
@@ -48,7 +55,8 @@ def p_metodos(p):
     | union'''
 
 def p_imprimir(p):
-    'imprimir : PRINT LPAREN factor RPAREN'
+    '''imprimir : PRINT LPAREN factor RPAREN
+    | PRINT LPAREN metodos RPAREN'''
 
 
 
@@ -123,7 +131,7 @@ def p_else(p):
     'else : ELSE LBRACE sentencias RBRACE'
 
 def p_else_if(p):
-    'elseif : ELIF LPAREN condicion RPAREN LBRACE sentencias RBRACE else'
+    'elseif : ELSE IF LPAREN condicion RPAREN LBRACE sentencias RBRACE else'
 
 def p_for(p):
     '''for : FOR LPAREN type ID OF ID RPAREN LBRACE sentencias RBRACE'''
@@ -140,6 +148,21 @@ def p_array(p):
     '''array : type ID EQUAL LBRACKET RBRACKET
     | type ID EQUAL LBRACKET arr_parametro RBRACKET'''
 
+# const myMap = new Map([
+#    ["key1", "value1"],
+#    ["key2", "value2"]
+# ]);
+# console.log(myMap.has("key1"))
+# console.log(myMap.has("key3"))
+def p_map(p):
+    '''mapa : type ID EQUAL NEW MAP LPAREN LBRACKET map_parametro RBRACKET RPAREN
+    | type ID EQUAL NEW MAP LPAREN LBRACKET RBRACKET RPAREN
+    '''
+
+def p_map_parametro(p):
+    '''map_parametro : LBRACKET expresion COMMA expresion RBRACKET
+    | LBRACKET expresion COMMA expresion RBRACKET COMMA map_parametro
+    '''
 
 def p_set(p):
     '''set : type ID EQUAL NEW SET LPAREN RPAREN
@@ -166,7 +189,8 @@ def p_date_param(p):
 
 def p_type(p):
     '''type : VAR
-    | LET'''
+    | LET
+    | CONST'''
 
 def p_expresion_operacion(p):
     '''expresion : NUMBER operador NUMBER'''
